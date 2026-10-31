@@ -1,8 +1,14 @@
 import fileOrganizer
 
-folder = input("Digite o diretório que deseja organizar: ")
+folder = input("Enter the directory you want to organize: ")
+generate_a_log = input("Want to generate a log? (Y/n): ").lower().startswith("y")
 if fileOrganizer.is_valid_folder(folder):
-    fileOrganizer.organize_folder(folder)
-    print("Diretório organizado")
+    modifications = fileOrganizer.organize_folder(folder)
+    if modifications:
+        if (generate_a_log):
+            fileOrganizer.generate_log(folder, modifications)
+        print("organized directory")
+    else:
+        print("No files to organize. (T-T)")
 else:
-    print("ERRO: Diretório inválido!")
+    print("ERROR: Invalid directory")
